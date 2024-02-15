@@ -10,6 +10,8 @@ public class Servidor {
         final int puerto = 5000;
         final int puerto1 = 5002;
         final int puerto2 = 8001;
+        final String host1="10.43.100.189";
+        final String host2="10.43.100.50";
 
         try {
             servidor = new ServerSocket(puerto);
@@ -38,8 +40,8 @@ public class Servidor {
                 System.arraycopy(arregloNumeros, 0, primeraMitad, 0, mitad);
                 System.arraycopy(arregloNumeros, mitad, segundaMitad, 0, longitud - mitad);
 
-                int valor1 = enviarYRecibirMensaje(puerto1,primeraMitad);;
-                int valor2=enviarYRecibirMensaje(puerto2,segundaMitad);;
+                int valor1 = enviarYRecibirMensaje(host1,puerto1,primeraMitad);;
+                int valor2=enviarYRecibirMensaje(host2,puerto2,segundaMitad);;
                 int suma = valor1 + valor2;
                 out.writeInt(suma);
                 sc.close();
@@ -51,8 +53,8 @@ public class Servidor {
         }
     }
 
-    private static int enviarYRecibirMensaje(int puerto, int[] mensaje) {
-        try (Socket socket = new Socket("127.0.0.1", puerto);
+    private static int enviarYRecibirMensaje(String host,int puerto, int[] mensaje) {
+        try (Socket socket = new Socket(host, puerto);
              DataOutputStream out = new DataOutputStream(socket.getOutputStream());
              DataInputStream in = new DataInputStream(socket.getInputStream())) {
 
@@ -68,7 +70,7 @@ public class Servidor {
         } catch (IOException e) {
             System.err.println("Error en la comunicación con el servidor en el puerto " + puerto);
             e.printStackTrace();
-            return 0; // Otra acción según tu lógica de manejo de errores
+            return 0;
         }
     }
 
