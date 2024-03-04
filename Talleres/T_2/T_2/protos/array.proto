@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package array;
+
+service ArrayService {
+  rpc SendArray (Array) returns (Response) {}
+}
+
+message Array {
+  repeated int32 values = 1;
+}
+
+message Response {
+  int32 message = 1;
+}
