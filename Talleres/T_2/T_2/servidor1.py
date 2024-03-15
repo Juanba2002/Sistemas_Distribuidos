@@ -7,6 +7,7 @@ class ArrayService(array_pb2_grpc.ArrayServiceServicer):
     def SendArray(self, request, context):
         # Sumar los valores del arreglo
         suma = sum(request.values)
+        print(suma)
         # Crear el mensaje de respuesta
         return array_pb2.Response(message=suma)
 

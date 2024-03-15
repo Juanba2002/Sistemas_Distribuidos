@@ -12,8 +12,8 @@ class ArrayService(array_pb2_grpc.ArrayServiceServicer):
         segundaMitad = request.values[mitad:]
 
         # Enviar las mitades a los servidores secundarios y recibir las respuestas
-        valor1 = enviarYRecibirMensaje('localhost:5002', primeraMitad)
-        valor2 = enviarYRecibirMensaje('localhost:8001', segundaMitad)
+        valor1 = enviarYRecibirMensaje('192.168.214.163:5002', primeraMitad)
+        valor2 = enviarYRecibirMensaje('192.168.214.91:8001', segundaMitad)
 
         # Sumar los valores y devolver la respuesta
         suma = valor1 + valor2
@@ -37,6 +37,8 @@ def enviarYRecibirMensaje(host, mensaje):
 
     # Enviar el arreglo al servidor secundario y recibir la respuesta
     response = stub.SendArray(arreglo)
+    print(response.message)
+
 
     return response.message
 

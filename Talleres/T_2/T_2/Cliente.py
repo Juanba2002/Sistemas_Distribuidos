@@ -4,7 +4,7 @@ import array_pb2_grpc
 
 def run():
     # Conexión al servidor
-    channel = grpc.insecure_channel('localhost:5000')
+    channel = grpc.insecure_channel('192.168.214.242:5000')
     stub = array_pb2_grpc.ArrayServiceStub(channel)
 
     # Crear el arreglo
